@@ -37,12 +37,18 @@ public class Inventory {
         }
 
     }
-    public void MineralIncrementCount(MineralTypes mineral, int incrementAmount) {
+    public void MineralIncrementCount(MineralTypes mineral, int incrementAmount, bool showAddNotification) {
         
-        this.Minerals.FirstOrDefault(x => x.Data.Type == mineral).ActualAmmount += incrementAmount;
+        var mineralInmemory = this.Minerals.FirstOrDefault(x => x.Data.Type == mineral);
+        mineralInmemory.ActualAmmount += incrementAmount;
 
-        Debug.Log($"Added {incrementAmount} {mineral.ToString()} :" +
-                  $" {this.Minerals.FirstOrDefault(x => x.Data.Type == mineral).ActualAmmount}");
+        if (showAddNotification) {
+            UiSingleton.Instance.ShowLeftMessage($"+{incrementAmount} {mineral.ToString()} ({mineralInmemory.ActualAmmount})"); 
+        }
+
+        //! #Dev
+        Debug.Log($"Added {incrementAmount} {mineralInmemory.ToString()} :" +
+                  $" {mineralInmemory.ActualAmmount}");
     }
 
 }

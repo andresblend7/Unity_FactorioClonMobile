@@ -5,9 +5,22 @@ using UnityEngine;
 public class Rocks : MonoBehaviour, IMineral
 {
     private MineralData mineralData;
+    private bool mining = false;
+
+    public IEnumerator TimerEnableMining()
+    {
+        Debug.Log("waiting for " + this.mineralData.timeToPlayerMine);
+        yield return new WaitForSeconds(this.mineralData.timeToPlayerMine);
+        this.mining = false;
+    }
+
     public void PlayerClick()
     {
-        PlayerSingleton.Instance.inventory.MineralIncrementCount(mineralData.Type, 1);
+        if (!mining) {
+            this.mining = true;
+            PlayerSingleton.Instance.inventory.MineralIncrementCount(mineralData.Type, 1, true);
+            StartCoroutine(TimerEnableMining());
+        }
     }
 
     public void RegisterMineral()
