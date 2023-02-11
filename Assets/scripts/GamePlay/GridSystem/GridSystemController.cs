@@ -27,18 +27,6 @@ public class GridSystemController : MonoBehaviour
         this.CellsNotAllowed = new List<CellCordinates>();
         this.grid = new List<CellInfo>();
         this.RegisterSceneryCells();
-
-        //CellsNotAllowed.Add(new CellCordinates()
-        //{
-        //    x = 0,
-        //    z = 0
-        //});
-
-        //CellsNotAllowed.Add(new CellCordinates()
-        //{
-        //    x = 11,
-        //    z = 5
-        //});
     }
 
     private void RegisterSceneryCells()
@@ -47,7 +35,7 @@ public class GridSystemController : MonoBehaviour
         {
             var mineral = mineralCoords.position;
 
-            Debug.Log(mineral.x+" <--> "+mineral.z);
+            //Debug.Log(mineral.x+" <--> "+mineral.z);
 
             this.CellsNotAllowed.Add(new CellCordinates { 
                 x = (int) mineral.x,
@@ -122,7 +110,7 @@ public class GridSystemController : MonoBehaviour
             }
         }
 
-        ShowAndUpdateGrid();
+        //ShowAndUpdateGrid();
     }
 
     private void hideGrid()

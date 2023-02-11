@@ -27,15 +27,19 @@ public class InstantiateObjectsController : MonoBehaviour
                     if (Physics.Raycast(ray, out hit))
                     {
 
-                        var objectHited = hit.transform.gameObject;
-                        //Debug.Log("rayo "+ objectHited.tag);
+                    var objectHited = hit.transform.gameObject;
+                    //Debug.Log("rayo "+ objectHited.tag);
 
-                        if (objectHited.tag =="cell")
-                        {
-                         Debug.Log("Picó en una cell");
+                    if (objectHited.tag == "cell")
+                    {
+                        Debug.Log("Picó en una cell");
                         this.InstanteObjectInCell(0, (int)objectHited.transform.position.x, (int)objectHited.transform.position.z);
-                             hit.transform.gameObject.SetActive(false);
-                        }
+                        hit.transform.gameObject.SetActive(false);
+                    } else if (objectHited.tag == "mineral") {
+
+                        objectHited.SendMessage("PlayerClick");
+                    
+                    }
 
                         //touched = true;
                         //Debug.Log("ME TOCO" + this.transform.position.x + " - " + transform.position.z);
